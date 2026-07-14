@@ -2,15 +2,17 @@ baseURL: "https://stevebr.com"
 languageCode: en-us
 title: Steve's Website
 theme: PaperMod
-
-
 enableRobotsTXT: true
+
+# Place the permalinks block here at the root level
+permalinks:
+  blog: /blog/:year/:title/
 
 params:
 
-  cover:
-   linkFullImages: true
-   hiddenInList: true
+#  cover:
+#   linkFullImages: true
+#   hiddenInList: true
 
   ShowBreadCrumbs: true
   ShowReadingTime: false

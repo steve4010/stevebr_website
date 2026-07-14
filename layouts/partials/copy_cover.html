@@ -1,0 +1,27 @@
+{{- $cxt := .cxt }}
+{{- with $cxt.Params.cover }}
+
+  <!-- This line fixes the bug by explicitly reading PaperMod's visibility flags -->
+  {{- if not .isHidden }}
+    {{- $image := "" }}
+    
+    {{- if .relative }}
+      {{- $image = $cxt.Resources.GetMatch .image }}
+    {{- else }}
+      {{- $image = resources.Get .image }}
+    {{- end }}
+
+    {{- if $image }}
+      <!-- This resizes and compresses the image for the feed -->
+      {{- $webp := $image.Resize (printf "%dx%d webp q80" $image.Width $image.Height) }}
+      <div class="entry-cover">
+          <img loading="lazy" src="{{ $webp.RelPermalink }}" alt="{{ .alt | default $cxt.Title }}" width="{{ $webp.Width }}" height="{{ $webp.Height }}">
+      </div>
+    {{- else }}
+      <div class="entry-cover">
+          <img loading="lazy" src="{{ .image | relURL }}" alt="{{ .alt | default $cxt.Title }}">
+      </div>
+    {{- end }}
+  {{- end }}
+
+{{- end }}
