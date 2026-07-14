@@ -1,0 +1,30 @@
+# ignore
+
+*.log
+readme-sb.txt
+
+# Hugo build outputs
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+
+# Local development caches
+.hugo_build.lock
+/.sass-cache/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# IDE and Editor configurations
+/.idea/
+/.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Environment variables / Sensitive data
+.env
+.env.*
