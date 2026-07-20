@@ -29,7 +29,7 @@ jobs:
 
       # 4. Fire the exact Rsync sync sequence straight to NameCheap
       - name: Deploy via Rsync over SSH
-        uses: burnett01/rsync-deployments-action@v9
+        uses: burnett01/rsync-deployment-action@v9
         with:
           switches: -avzr --delete --exclude 'error_log'
           flags: '--dry-run' # <--- THIS PREVENTS ANY SERVER CHANGES
