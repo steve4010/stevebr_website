@@ -12,7 +12,7 @@ jobs:
     steps:
       # 1. Download your raw markdown files and layout templates into the cloud runner
       - name: Checkout Source Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true  # Automatically pulls your theme if it's a Git submodule
           fetch-depth: 0    # Pulls complete history so Hugo can generate correct modification dates
@@ -48,5 +48,5 @@ jobs:
             --exclude 'error_log' \
             --dry-run \
             -e "ssh -i ~/.ssh/id_ed25519 -p 21098" \
-            public/ \
-            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/stevebr.com      
+            test.txt \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/stevebr.com   
