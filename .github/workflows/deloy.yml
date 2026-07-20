@@ -1,0 +1,40 @@
+name: Universal Hugo Build & Deploy
+
+on:
+  push:
+    branches:
+      - main  # Triggers the automation every time you run 'git push origin main'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Download your raw markdown files and layout templates into the cloud runner
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          submodules: true  # Automatically pulls your theme if it's a Git submodule
+          fetch-depth: 0    # Pulls complete history so Hugo can generate correct modification dates
+
+      # 2. Install the exact compiler environment needed
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true    # Keeps compatibility intact if your theme processes SASS/SCSS
+
+      # 3. Compile the site inside the cloud container
+      - name: Build Static Site Assets
+        run: hugo --minify
+
+      # 4. Fire the exact Rsync sync sequence straight to NameCheap
+      - name: Deploy via Rsync over SSH
+        uses: burnett01/rsync-deployments-action@v9
+        with:
+          switches: -avzr --delete --exclude 'error_log'
+          path: public/
+          remote_path: /home/${{ secrets.SERVER_USER }}/stevebr.com
+          remote_host: ${{ secrets.SERVER_HOST }}
+          remote_user: ${{ secrets.SERVER_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          remote_port: 21098 # Locks onto NameCheap's custom SSH port
