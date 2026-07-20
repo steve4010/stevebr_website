@@ -47,5 +47,5 @@ jobs:
             --delete \
             --exclude 'error_log' \
             -e "ssh -i ~/.ssh/id_ed25519 -p 21098" \
-            test.txt \
+            public/ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/stevebr.com   
