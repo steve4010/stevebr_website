@@ -46,7 +46,6 @@ jobs:
           rsync -avzr \
             --delete \
             --exclude 'error_log' \
-            --dry-run \
             -e "ssh -i ~/.ssh/id_ed25519 -p 21098" \
             test.txt \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/stevebr.com   
