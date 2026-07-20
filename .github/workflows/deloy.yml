@@ -32,6 +32,7 @@ jobs:
         uses: burnett01/rsync-deployments-action@v9
         with:
           switches: -avzr --delete --exclude 'error_log'
+          flags: '--dry-run' # <--- THIS PREVENTS ANY SERVER CHANGES
           path: public/
           remote_path: /home/${{ secrets.SERVER_USER }}/stevebr.com
           remote_host: ${{ secrets.SERVER_HOST }}
