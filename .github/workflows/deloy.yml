@@ -46,6 +46,7 @@ jobs:
           rsync -avzr \
             --delete \
             --exclude 'error_log' \
+             --exclude '.well-known' \
             -e "ssh -i ~/.ssh/id_ed25519 -p 21098" \
             public/ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/stevebr.com   
